@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"logiops-gui/src/parser"
+	"logiops-gui/logiops/parser"
 )
 
 func main() {

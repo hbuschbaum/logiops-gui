@@ -2,8 +2,8 @@ package parser_test
 
 import (
 	"fmt"
-	con "logiops-gui/src/constants"
-	"logiops-gui/src/parser"
+	con "logiops-gui/logiops/constants"
+	"logiops-gui/logiops/parser"
 	"math/rand"
 	"strings"
 	"testing"

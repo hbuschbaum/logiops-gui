@@ -1,7 +1,7 @@
 package parser
 
 import (
-	con "logiops-gui/src/constants"
+	con "logiops-gui/logiops/constants"
 	"strconv"
 )
 

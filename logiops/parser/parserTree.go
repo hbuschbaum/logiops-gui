@@ -1,7 +1,7 @@
 package parser
 
 import (
-	"logiops-gui/src/helper"
+	"logiops-gui/logiops/helper"
 )
 
 type Node struct {
