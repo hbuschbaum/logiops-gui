@@ -2,32 +2,10 @@ package parser
 
 import (
 	"strconv"
+	con "logiops-gui/constants"
 )
 
-// A map which safes the allowed keywords
-var lexerMap = map[string]struct{}{
-	"devices":     {},
-	"name":        {},
-	"ignore":      {},
-	"true":        {},
-	"false":       {},
-	"cid":         {},
-	"action":      {},
-	"type":        {},
-	"gestures":    {},
-	"direction":   {},
-	"mode":        {},
-	"keys":        {},
-	"buttons":     {},
-	"smartshift":  {},
-	"on":          {},
-	"threshold":   {},
-	"hiresscroll": {},
-	"hires":       {},
-	"invert":      {},
-	"target":      {},
-	"dpi":         {},
-}
+
 
 func Lexer(s string) []string {
 	res := []string{}
@@ -35,14 +13,14 @@ func Lexer(s string) []string {
 
 	for i := 0; i < len(s); i++ {
 		switch c := s[i]; c {
-		case '(', ')', '{', '}', '[', ']', ';', ':', ',':
+		case '(', ')', '{', '}', '[', ']', ';', ':', ',', '=':
 			if tmp != "" {
-				_, ok := lexerMap[tmp]
-				_, err := strconv.Atoi(tmp)
-				if ok || err != nil {
+				_, ok := con.LexerMap[tmp]
+				_, err := strconv.ParseInt(tmp, 0, 64)
+				if ok || err == nil {
 					res = append(res, tmp)
-					tmp = ""
 				}
+				tmp = ""
 			}
 			res = append(res, string(c))
 		case '"':
