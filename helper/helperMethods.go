@@ -13,7 +13,7 @@ func Index(s []string, str string) (int, bool) {
 }
 
 func LastIndex(s []string, str string) (int, bool) {
-	for i := len(s)-1; i >= 0; i-- {
+	for i := len(s) - 1; i >= 0; i-- {
 		if s[i] == str {
 			return i, true
 		}
@@ -21,7 +21,6 @@ func LastIndex(s []string, str string) (int, bool) {
 
 	return -1, false
 }
-
 
 type ParseError struct {
 	Err string

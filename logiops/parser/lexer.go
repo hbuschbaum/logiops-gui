@@ -1,11 +1,9 @@
 package parser
 
 import (
-	"strconv"
 	con "logiops-gui/constants"
+	"strconv"
 )
-
-
 
 func Lexer(s string) []string {
 	res := []string{}

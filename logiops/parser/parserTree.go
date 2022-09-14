@@ -6,7 +6,7 @@ import (
 
 type Node struct {
 	Children []Node
-	Value string
+	Value    string
 }
 
 type Tree struct {
@@ -47,7 +47,7 @@ func ignoreAndDevices(s []string) ([]Node, error) {
 				return nil, helper.ParseError{Err: "Expected '];'"}
 			}
 			n := NewNode("ignore")
-			children, err := ignoreParse(s[ignoreIndex+2:ignoreClose+1])
+			children, err := ignoreParse(s[ignoreIndex+2 : ignoreClose+1])
 			if err != nil {
 				return nil, err
 			}
@@ -66,7 +66,7 @@ func ignoreAndDevices(s []string) ([]Node, error) {
 			}
 
 			n := NewNode("devices")
-			children, err := devicesParse(s[devicesIndex+2:devicesClose+1])
+			children, err := devicesParse(s[devicesIndex+2 : devicesClose+1])
 			if err != nil {
 				return nil, err
 			}
@@ -82,4 +82,4 @@ func ignoreParse(s []string) ([]Node, error) {
 	return nil, nil
 }
 
-func devicesParse(s []string) ([]Node, error) 
+func devicesParse(s []string) ([]Node, error)

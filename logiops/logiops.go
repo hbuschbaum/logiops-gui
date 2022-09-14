@@ -19,7 +19,6 @@ func parseLogiData(s string) LogiData {
 	return LogiData{}
 }
 
-
 func openAndStrip() (string, error) {
 	dat, err := os.ReadFile("/etc/logiops.conf")
 	if err != nil {

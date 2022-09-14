@@ -3,7 +3,7 @@ package logiops
 type Pid int
 
 type LogiData struct {
-	Ignore []Pid
+	Ignore  []Pid
 	Devices []LogiDevice
 }
 
@@ -17,13 +17,13 @@ type LogiDevice struct {
 }
 
 type LogiButton struct {
-	Cid int
+	Cid    int
 	Action LogiAction
 }
 
 type LogiSmartshift struct {
-	On bool
-	Threshold int
+	On               bool
+	Threshold        int
 	DefaultThreshold int
 }
 
@@ -33,7 +33,7 @@ type LogiHiresscroll struct {
 
 type LogiThumbwheel struct {
 	Divert, Invert bool
-	Left, Right LogiActionGesture
+	Left, Right    LogiActionGesture
 }
 
 type LogiAction interface {
@@ -47,8 +47,8 @@ type LogiActionGesture struct {
 type LogiGestures struct {
 	Direction string
 	Threshold int
-	Mode string
-	Action LogiActionKeypress
+	Mode      string
+	Action    LogiActionKeypress
 }
 
 func (LogiActionGesture) getInfo() string {
@@ -61,4 +61,3 @@ type LogiActionKeypress struct {
 func (LogiActionKeypress) getInfo() string {
 	return ""
 }
-

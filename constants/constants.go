@@ -29,7 +29,7 @@ type Keywords int
 
 const (
 	Devices Keywords = iota
-	Name 
+	Name
 	Ignore
 	True
 	False
