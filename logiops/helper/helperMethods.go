@@ -23,9 +23,11 @@ func LastIndex(s []string, str string) (int, bool) {
 }
 
 type ParseError struct {
-	Err string
+	Pos int
+	Expected string
+	Wrong string
 }
 
 func (e ParseError) Error() string {
-	return fmt.Sprint(e.Err)
+	return fmt.Sprintf("Pos %v: %v. Expected: %v", e.Pos, e.Wrong, e.Expected)
 }

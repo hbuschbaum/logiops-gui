@@ -2,12 +2,15 @@ package parser_test
 
 import (
 	"fmt"
+	"logiops-gui/logiops"
 	con "logiops-gui/logiops/constants"
 	"logiops-gui/logiops/parser"
 	"math/rand"
 	"strings"
 	"testing"
 	"time"
+
+	"github.com/google/go-cmp/cmp"
 )
 
 func TestLexer(t *testing.T) {
@@ -74,4 +77,23 @@ func makeRandomArray() []string {
 	}
 
 	return res
+}
+
+
+func TestParser(t *testing.T) {
+	a := logiops.LogiData{}
+	a.Ignore = []logiops.Pid{
+		0xa1, 12, 0x999,
+	}
+
+	str := "ignore:\n[0xa1, 12, 0x999];\n"
+
+	b, err := parser.Parse(parser.Lexer(str))
+
+	if err != nil {
+		t.Fatalf(err.Error())
+	}
+	if !cmp.Equal(a, b) {
+		t.Fatalf("a and b are unequal.\na:%v\nb:%v", a, b)
+	}
 }
