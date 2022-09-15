@@ -128,7 +128,7 @@ func devicesParse(curr *int, parserString *[]lexerTuple, parsedData *logiops.Log
 
 func deviceObjectParser(curr *int, parserString *[]lexerTuple, parsedData *logiops.LogiDevice) error {
 	if (*parserString)[*curr].lType != keyword {
-		return newParseError(*curr,"keyword1", parserString)
+		return newParseError(*curr, "keyword1", parserString)
 	}
 	switch (*parserString)[*curr].str {
 	case "name":
@@ -154,7 +154,7 @@ func deviceObjectParser(curr *int, parserString *[]lexerTuple, parsedData *logio
 		parsedData.Dpi = int(num)
 	case "smartshift":
 		*curr++
-		
+
 	}
 	*curr++
 	if (*parserString)[*curr].lType == semicolon {

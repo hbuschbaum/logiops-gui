@@ -15,7 +15,7 @@ func TestParser(t *testing.T) {
 	a.Devices = []logiops.LogiDevice{
 		{
 			Name: "MX Master",
-			Dpi: 1500,
+			Dpi:  1500,
 		},
 		{
 			Name: "MX Master 2",

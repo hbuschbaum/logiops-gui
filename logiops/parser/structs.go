@@ -1,9 +1,10 @@
 package parser
+
 import (
 	"fmt"
 )
 
-/// Lexer Struct and Constants -------------------------------------------------------
+// / Lexer Struct and Constants -------------------------------------------------------
 type lexerType int
 
 const (
@@ -72,8 +73,7 @@ const (
 	Dpi
 )
 
-
-/// Parse Error struct --------------------------------------------------------------
+// / Parse Error struct --------------------------------------------------------------
 type ParseError struct {
 	Pos      int
 	Expected string
