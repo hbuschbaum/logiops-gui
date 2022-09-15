@@ -12,8 +12,17 @@ func TestParser(t *testing.T) {
 	a.Ignore = []logiops.Pid{
 		0xa1, 12, 0x999,
 	}
+	a.Devices = []logiops.LogiDevice{
+		{
+			Name: "MX Master",
+			Dpi: 1500,
+		},
+		{
+			Name: "MX Master 2",
+		},
+	}
 
-	str := "ignore:\n[0xa1, 12, 0x999];\n"
+	str := "ignore:\n[0xa1, 12, 0x999];\ndevices: ({name:\"MX Master\";dpi= 1500;}, {name= \"MX Master 2\";});"
 
 	b, err := parser.Parse(str)
 

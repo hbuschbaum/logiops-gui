@@ -77,5 +77,93 @@ func ignoreParse(curr *int, parserString *[]lexerTuple, parsedData *logiops.Logi
 }
 
 func devicesParse(curr *int, parserString *[]lexerTuple, parsedData *logiops.LogiData) error {
-	return nil
+	if (*parserString)[*curr].lType != equal {
+		return newParseError(*curr, ": or =", parserString)
+	}
+	*curr++
+	if (*parserString)[*curr].str != "(" {
+		return newParseError(*curr, "(", parserString)
+	}
+	*curr++
+	for {
+		if (*parserString)[*curr].str == ")" {
+			break
+		}
+
+		//device Object
+		if (*parserString)[*curr].str != "{" {
+			return newParseError(*curr, "{", parserString)
+		}
+		*curr++
+		parsedDeviceObject := logiops.LogiDevice{}
+		err := deviceObjectParser(curr, parserString, &parsedDeviceObject)
+		if err != nil {
+			return err
+		}
+		parsedData.Devices = append(parsedData.Devices, parsedDeviceObject)
+		*curr++
+		// if (*parserString)[*curr].str != "}" {
+		// 	return newParseError(*curr, "}", parserString)
+		// }
+		// *curr++
+		//------------
+
+		if (*parserString)[*curr].str == "," {
+			*curr++
+			continue
+		} else if (*parserString)[*curr].str == ")" {
+			break
+		} else {
+			return newParseError(*curr, ", or )", parserString)
+		}
+	}
+	*curr++
+	if (*parserString)[*curr].lType == semicolon {
+		*curr++
+		return ignoreAndDevices(curr, parserString, parsedData)
+	} else {
+		return newParseError(*curr, ";", parserString)
+	}
+}
+
+func deviceObjectParser(curr *int, parserString *[]lexerTuple, parsedData *logiops.LogiDevice) error {
+	if (*parserString)[*curr].lType != keyword {
+		return newParseError(*curr,"keyword1", parserString)
+	}
+	switch (*parserString)[*curr].str {
+	case "name":
+		*curr++
+		if (*parserString)[*curr].lType != equal {
+			return newParseError(*curr, ": or =", parserString)
+		}
+		*curr++
+		if (*parserString)[*curr].lType != strings {
+			return newParseError(*curr, "name", parserString)
+		}
+		parsedData.Name, _ = strconv.Unquote((*parserString)[*curr].str)
+	case "dpi":
+		*curr++
+		if (*parserString)[*curr].lType != equal {
+			return newParseError(*curr, ": or =", parserString)
+		}
+		*curr++
+		if (*parserString)[*curr].lType != number {
+			return newParseError(*curr, "number", parserString)
+		}
+		num, _ := strconv.ParseInt((*parserString)[*curr].str, 0, 64)
+		parsedData.Dpi = int(num)
+	case "smartshift":
+		*curr++
+		
+	}
+	*curr++
+	if (*parserString)[*curr].lType == semicolon {
+		*curr++
+		if (*parserString)[*curr].str == "}" {
+			return nil
+		}
+		return deviceObjectParser(curr, parserString, parsedData)
+	} else {
+		return newParseError(*curr, ";", parserString)
+	}
 }

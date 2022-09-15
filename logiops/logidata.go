@@ -10,7 +10,7 @@ type LogiData struct {
 type LogiDevice struct {
 	Name string
 	//Buttons []LogiButton
-	//Dpi []int
+	Dpi int
 	//Smartshift LogiSmartshift
 	//Hiresscroll LogiHiresscroll
 	//Thumbwheel LogiThumbwheel
