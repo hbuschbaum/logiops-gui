@@ -10,8 +10,8 @@ type LogiData struct {
 type LogiDevice struct {
 	Name string
 	//Buttons []LogiButton
-	Dpi int
-	//Smartshift LogiSmartshift
+	Dpi        int
+	Smartshift *LogiSmartshift
 	//Hiresscroll LogiHiresscroll
 	//Thumbwheel LogiThumbwheel
 }
@@ -36,8 +36,9 @@ type LogiThumbwheel struct {
 	Left, Right    LogiActionGesture
 }
 
-type LogiAction interface {
-	getInfo() string
+type LogiAction struct {
+	ActionTyoe string
+	Action     interface{}
 }
 
 type LogiActionGesture struct {
@@ -51,13 +52,5 @@ type LogiGestures struct {
 	Action    LogiActionKeypress
 }
 
-func (LogiActionGesture) getInfo() string {
-	return ""
-}
-
 type LogiActionKeypress struct {
-}
-
-func (LogiActionKeypress) getInfo() string {
-	return ""
 }

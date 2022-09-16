@@ -153,7 +153,22 @@ func deviceObjectParser(curr *int, parserString *[]lexerTuple, parsedData *logio
 		num, _ := strconv.ParseInt((*parserString)[*curr].str, 0, 64)
 		parsedData.Dpi = int(num)
 	case "smartshift":
+		if parsedData.Smartshift != nil {
+			return newParseError(*curr, "only one smartshift item allowed", parserString)
+		}
+		parsedData.Smartshift = &logiops.LogiSmartshift{}
 		*curr++
+		if (*parserString)[*curr].lType != equal {
+			return newParseError(*curr, ": or =", parserString)
+		}
+		*curr++
+		if (*parserString)[*curr].str != "{" {
+			return newParseError(*curr, "{", parserString)
+		}
+		*curr++
+		if err := smartshiftParser(curr, parserString, parsedData); err != nil {
+			return err
+		}
 
 	}
 	*curr++
@@ -166,4 +181,12 @@ func deviceObjectParser(curr *int, parserString *[]lexerTuple, parsedData *logio
 	} else {
 		return newParseError(*curr, ";", parserString)
 	}
+}
+
+func smartshiftParser(curr *int, parserString *[]lexerTuple, parsedData *logiops.LogiDevice) error {
+	switch (*parserString)[*curr].str {
+	case "on":
+		*curr++
+	}
+	return nil
 }

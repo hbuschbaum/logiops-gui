@@ -15,6 +15,7 @@ const (
 	keyword
 	number
 	strings
+	boolean
 )
 
 type lexerTuple struct {
@@ -27,8 +28,6 @@ var lexerMap = map[string]struct{}{
 	"devices":     {},
 	"name":        {},
 	"ignore":      {},
-	"true":        {},
-	"false":       {},
 	"cid":         {},
 	"action":      {},
 	"type":        {},
@@ -47,31 +46,31 @@ var lexerMap = map[string]struct{}{
 	"dpi":         {},
 }
 
-type keywords int
+// type keywords int
 
-const (
-	Devices keywords = iota
-	Name
-	Ignore
-	True
-	False
-	Cid
-	Action
-	Type
-	Gestures
-	Direction
-	Mode
-	Keys
-	Buttons
-	Smartshift
-	On
-	Threshold
-	Hiresscroll
-	Hires
-	Invert
-	Target
-	Dpi
-)
+// const (
+// 	Devices keywords = iota
+// 	Name
+// 	Ignore
+// 	True
+// 	False
+// 	Cid
+// 	Action
+// 	Type
+// 	Gestures
+// 	Direction
+// 	Mode
+// 	Keys
+// 	Buttons
+// 	Smartshift
+// 	On
+// 	Threshold
+// 	Hiresscroll
+// 	Hires
+// 	Invert
+// 	Target
+// 	Dpi
+//)
 
 // / Parse Error struct --------------------------------------------------------------
 type ParseError struct {

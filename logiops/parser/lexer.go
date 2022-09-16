@@ -16,6 +16,8 @@ func lexer(s string) []lexerTuple {
 					res = append(res, lexerTuple{keyword, tmp}) //append the tmp-string
 				} else if _, err := strconv.ParseInt(tmp, 0, 64); err == nil { //Look if the tmp-string is a number
 					res = append(res, lexerTuple{number, tmp})
+				} else if _, err := strconv.ParseBool(tmp); err == nil { //Look if the tmp-string is a boolean
+					res = append(res, lexerTuple{boolean, tmp})
 				}
 				tmp = ""
 			}
